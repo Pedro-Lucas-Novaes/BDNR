@@ -1,0 +1,32 @@
+cod_cliente,nome_cliente,cpf,genero,data_nascimento,cidade,estado,canal_aquisicao,segmento,data_cadastro
+CRM-001,Ana Paula Ferreira,111.222.333-44,F,1985-07-12,São Paulo,SP,App,Platinum,2020-03-10
+CRM-002,Bruno Cardoso Lima,222.333.444-55,M,1990-11-28,Campinas,SP,Loja física,Ouro,2021-06-22
+CRM-003,Carla Souza Mendes,333.444.555-66,F,1976-03-05,Registro,SP,Loja fisica,Prata,2019-11-05
+CRM-004,Diego Alves Costa,444.555.666-77,M,2000-09-15,São Paulo,SP,Hotsite,Bronze,2023-01-14
+CRM-005,Elena Rocha Barbosa,555.666.777-88,F,1965-02-20,Curitiba,PR,Loja Física,Platinum,2018-07-30
+CRM-006,Felipe Santos Nunes,666.777.888-99,M,1982-06-08,Florianópolis,SC,app,Ouro,2020-09-18
+CRM-007,Gabriela Lima Torres,777.888.999-00,F,1993-04-17,Salvador,BA,App,prata,2022-04-02
+CRM-008,Henrique Martins,888.999.000-11,M,1972-12-01,Recife,PE,Loja Física,Ouro,2019-08-25
+CRM-009,Isabela Pereira Costa,999.000.111-22,F,1991-08-30,Belo Horizonte,MG,Hotsite,Platinum,2017-12-15
+CRM-010,João Victor Ribeiro,000.111.222-33,M,2001-05-22,Campinas,SP,App,Bronze,2023-06-10
+CRM-011,Kamila Dias Fonseca,111.333.555-77,F,1983-10-14,São Paulo,SP,Loja Física,Ouro,2020-02-28
+CRM-012,Lucas Barros Sousa,222.444.666-88,M,1994-01-09,Curitiba,PR,App,Prata,2021-10-05
+CRM-013,Mariana Castro Lopes,333.555.777-99,F,1970-07-25,Registro,SP,Loja Física,Bronze,2022-08-17
+CRM-014,Nicolas Alencar,444.666.888-00,M,1963-03-11,Salvador,BA,Loja Física,Platinum,2016-05-20
+CRM-015,Olivia Ramos Silva,555.777.999-11,F,2002-11-03,Recife,PE,Hotsite,Bronze,2023-11-01
+CRM-016,Pedro Augusto Cunha,666.888.000-22,M,1981-06-18,Belo Horizonte,MG,App,Ouro,2019-04-12
+CRM-017,Quésia Monteiro,777.999.111-33,F,1992-09-27,São Paulo,SP,Loja Física,Prata,2021-07-22
+CRM-018,Rafael Teixeira,888.000.222-44,M,1974-04-06,Florianópolis,SC,app,Ouro,2020-01-09
+CRM-019,Sara Duarte Moreira,999.111.333-55,F,1984-12-22,Campinas,SP,Hotsite,Platinum,2018-10-30
+CRM-020,Thiago Bezerra Lima,000.222.444-66,M,1995-08-04,Curitiba,PR,App,Bronze,2023-03-14
+CRM-021,Ursula Campos,111.444.777-88,F,1962-01-30,Salvador,BA,Loja Física,Ouro,2019-06-05
+CRM-022,Vinícius Andrade,222.555.888-99,M,2002-03-16,Belo Horizonte,MG,App,Bronze,2024-01-20
+CRM-023,Wanda Ferreira Leal,333.666.999-00,F,1980-05-07,Recife,PE,Loja Física,Prata,2021-09-11
+CRM-024,Xisto Carvalho,444.777.000-11,M,1969-11-19,São Paulo,SP,Hotsite,Platinum,2017-03-25
+CRM-025,Yasmin Torres Silva,555.888.111-22,F,1993-07-13,Campinas,SP,App,Ouro,2020-12-08
+CRM-026,Zeca Oliveira Braga,666.999.222-33,M,1962-02-28,Florianópolis,SC,Loja Física,Prata,2022-05-16
+CRM-027,Alice Mendes Pinto,777.000.333-44,F,2003-04-19,Registro,SP,App,Bronze,2023-09-28
+CRM-028,Bernardo Costa Rios,888.111.444-55,M,1980-08-08,Salvador,BA,Loja Física,Ouro,2018-11-14
+CRM-029,Cecília Alves Dias,999.222.555-66,F,1971-10-14,Belo Horizonte,MG,Hotsite,Platinum,2016-08-02
+CRM-002,Bruno Cardoso Lima,222.333.444-55,M,1990-11-28,Campinas,SP,Loja Física,Ouro,2021-06-22
+CRM-030,Roberto Silva,,M,1988-05-10,,,Loja Física,Bronze,2023-07-15

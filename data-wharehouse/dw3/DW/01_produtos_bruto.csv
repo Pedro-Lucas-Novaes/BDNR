@@ -1,0 +1,50 @@
+cod_produto,nome_produto,marca,categoria,subcategoria,unidade,preco_custo,preco_venda,fornecedor,ativo
+BEB-001,Coca-Cola 2L,Coca-Cola,Bebidas,Refrigerantes,UN,4.80,8.99,Coca-Cola FEMSA,1
+BEB-002,Guaraná Antarctica 2L,Antarctica,Bebidas,Refrigerantes,UN,3.90,7.49,AmBev Distribuição,1
+BEB-003,Pepsi 2L,Pepsi,BEBIDAS,Refrigerantes,UN,3.70,6.99,PepsiCo Brasil,1
+BEB-004,Sprite 600ml,Coca-Cola,bebidas,Refrigerantes,UN,2.10,3.99,Coca-Cola FEMSA,1
+BEB-005,Suco Del Valle Laranja 1L,Del Valle,Bebidas,Sucos,UN,3.20,5.99,Coca-Cola FEMSA,1
+BEB-006,Suco Maguary Goiaba 1L,Maguary,Bebidas,sucos,UN,4.10,7.49,Maguary Ind. Alimentos,1
+BEB-007,Água Mineral Crystal 1.5L,Crystal,Bebidas,Águas,UN,1.20,2.29,Coca-Cola FEMSA,1
+BEB-008,Água Mineral Bonafont 500ml,Bonafont,Bebidas,Águas,UN,0.80,1.79,Danone Waters,1
+BEB-009,Cerveja Brahma 350ml Lata,Brahma,Bebidas,Cervejas,UN,2.50,4.49,AmBev Distribuição,1
+BEB-010,Cerveja Heineken 600ml,Heineken,Bebidas,Cervejas,UN,5.80,9.99,Heineken Brasil,1
+LAT-001,Leite Integral Itambé 1L,Itambé,Laticínios,Leites,UN,3.50,5.89,Itambé Alimentos,1
+LAT-002,Leite Desnatado Ninho 1L,Ninho,LATICÍNIOS,Leites,UN,4.20,7.29,Nestlé Brasil,1
+LAT-003,Iogurte Grego Danone 500g,Danone,Laticínios,Iogurtes,UN,5.90,9.99,Danone Brasil,1
+LAT-004,Queijo Mussarela Polenghi KG,Polenghi,Laticínios,Queijos,KG,22.00,38.90,Polenghi Alimentos,1
+LAT-005,Manteiga Aviação 200g,Aviação,Laticínios,Manteigas,UN,5.10,8.99,Cooperativa Aviação,1
+LAT-006,Requeijão Catupiry 200g,Catupiry,Laticínios,Requeijões,UN,5.40,9.49,Laticínios Catupiry,1
+GRA-001,Arroz Camil Longo Fino 5kg,Camil,Grãos,Arroz,UN,14.50,23.90,Camil Alimentos,1
+GRA-002,Feijão Carioca Camil 1kg,Camil,Grãos,Feijão,UN,4.20,7.49,Camil Alimentos,1
+GRA-003,Macarrão Espaguete Barilla 500g,Barilla,Grãos,Massas,UN,3.80,6.99,Barilla do Brasil,1
+GRA-004,Farinha de Trigo Dona Benta 1kg,Dona Benta,Grãos,Farinhas,UN,3.10,5.49,J. Macêdo,1
+GRA-005,Açúcar União Refinado 1kg,União,Grãos,Açúcares,UN,3.40,5.99,União Açúcar,1
+CAR-001,Frango Inteiro Sadia KG,Sadia,Carnes,Aves,KG,9.80,16.90,BRF Brasil,1
+CAR-002,Alcatra Bovina KG,Friboi,Carnes,Bovinos,KG,28.00,49.90,JBS Friboi,1
+CAR-003,Linguiça Toscana Perdigão 500g,Perdigão,carnes,Embutidos,UN,8.50,14.90,BRF Brasil,1
+CAR-004,Presunto Fatiado Seara 200g,Seara,Carnes,Embutidos,UN,5.20,9.49,Seara Alimentos,1
+HOR-001,Banana Prata KG,,Hortifruti,Frutas,KG,2.80,4.99,Ceasa SP,1
+HOR-002,Tomate Salada KG,,Hortifruti,Legumes,KG,3.50,5.99,Ceasa SP,1
+HOR-003,Batata Inglesa KG,,Hortifruti,Legumes,KG,2.20,3.99,Ceasa SP,1
+HOR-004,Alface Crespa Unidade,,Hortifruti,Verduras,UN,1.10,2.49,Ceasa SP,1
+PAD-001,Pão de Forma Wickbold 500g,Wickbold,Padaria,Pães,UN,5.20,8.99,Wickbold Alimentos,1
+PAD-002,Biscoito Recheado Oreo 90g,Nabisco,Padaria,Biscoitos,UN,2.30,4.49,Mondelēz Brasil,1
+PAD-003,Chocolate Lacta ao Leite 80g,Lacta,Padaria,Chocolates,UN,3.50,5.99,Mondelēz Brasil,1
+PAD-004,Café Pilão Torrado 500g,Pilão,Padaria,Cafés,UN,9.80,16.90,Sara Lee Cafés,1
+PAD-005,Achocolatado Nescau 400g,Nescau,Padaria,Achocolatados,UN,5.40,9.49,Nestlé Brasil,1
+LIM-001,Detergente Ypê 500ml,Ypê,Limpeza,Louças,UN,1.50,2.79,Química Amparo,1
+LIM-002,Sabão em Pó OMO 1.6Kg,OMO,Limpeza,Roupas,UN,14.20,24.90,Unilever Brasil,1
+LIM-003,Água Sanitária Q-Boa 1L,Q-Boa,Limpeza,Desinfetantes,UN,2.10,3.99,Clorox Brasil,1
+LIM-004,Desinfetante Pinho Sol 500ml,Pinho Sol,limpeza,Desinfetantes,UN,3.20,5.99,Clorox Brasil,1
+LIM-005,Esponja Scotch-Brite Dupla Face,3M,Limpeza,Utensílios,UN,1.80,3.49,3M do Brasil,1
+HIG-001,Shampoo Pantene 400ml,Pantene,Higiene,Cabelos,UN,10.50,18.90,P&G Brasil,1
+HIG-002,Condicionador Seda 325ml,Seda,Higiene,Cabelos,UN,8.20,14.90,Unilever Brasil,1
+HIG-003,Sabonete Dove 90g,Dove,Higiene,Sabonetes,UN,2.80,4.99,Unilever Brasil,1
+HIG-004,Creme Dental Colgate 90g,Colgate,Higiene,Bucal,UN,3.40,5.99,Colgate-Palmolive,1
+HIG-005,Desodorante Rexona 150ml,Rexona,Higiene,Desodorantes,UN,9.80,17.90,Unilever Brasil,1
+CON-001,Pizza Sadia Mussarela 460g,Sadia,Congelados,Pizzas,UN,11.50,19.90,BRF Brasil,1
+CON-002,Lasanha Perdigão Bolonhesa 600g,Perdigão,Congelados,Pratos Prontos,UN,12.80,21.90,BRF Brasil,1
+CON-003,Sorvete Kibon Napolitano 1.5L,Kibon,Congelados,Sorvetes,UN,13.50,22.90,Unilever Brasil,1
+BEB-011,Vinho Miolo Reserva Cabernet 750ml,Miolo,Bebidas,Vinhos,UN,-5.00,39.90,Miolo Wine Group,1
+LIM-006,,Ariel,Limpeza,Roupas,UN,13.00,22.90,P&G Brasil,1

@@ -1,0 +1,11 @@
+cod_loja,nome_loja,formato,endereco,cidade,estado,area_m2,num_checkouts,gerente,data_inauguracao
+MB-001,Mart Brasil Paulista,Hipermercado,Av. Paulista 1200 Bela Vista,São Paulo,SP,8500,40,Ricardo Almeida,15/03/2010
+MB-002,Mart Brasil Campinas,Hipermercado,Rod. Dom Pedro I 5400 Jardim Ipaussurama,Campinas,SP,7200,35,Fernanda Oliveira,20/08/2012
+MB-003,Mart Brasil Registro,Supermercado,Av. Prefeito Teixeira Soares 480,Registro,SP,2200,12,marcos teixeira,10/11/2015
+MB-004,Mart Brasil Curitiba,Hipermercado,Av. das Torres 3800 Santa Cândida,Curitiba,PR,6800,32,Juliana Santos,22/05/2011
+MB-005,Mart Brasil Florianópolis,Supermercado,Rua Bocaiúva 2350 Centro,Florianópolis,SC,3100,18,carlos pereira,14/02/2016
+MB-006,Mart Brasil Salvador,HIPERMERCADO,Av. Paralela 1900 Pituba,Salvador,BA,7500,36,Ana Costa,01/09/2013
+MB-007,Mart Brasil Recife,Supermercado,Av. Domingos Ferreira 880 Boa Viagem,Recife,PE,2800,15,Paulo Rodrigues,18/04/2017
+MB-008,Mart Brasil Belo Horizonte,Atacado,Av. Amazonas 6400 Gameleira,Belo Horizonte,MG,9200,20,Luciana Martins,30/07/2014
+MB-009,Mart Brasil Porto Alegre,Supermercado,Av. Ipiranga 6681 Partenon,Porto Alegre,RS,,10,Ana Lima,2018-11-05
+MB-003,Mart Brasil Registro DUPLICADO,Supermercado,Av. Prefeito Teixeira Soares 480,Registro,SP,2200,12,Marcos Teixeira,10/11/2015

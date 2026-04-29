@@ -1,0 +1,138 @@
+//Conectar ao banco
+use netflix;
+
+db.filmes.find()
+
+//inserir um unico documento
+db.filmes.insertOne({
+    titulo: "Duna: parte 2",
+    tipo: "Filme",
+    ano_lancamento: 2024,
+    genero: ["Ficcao_cientifica", "aventura"],
+    duracao_min: 166,
+    avaliacao:{
+        media: 8.5,
+        votos: 342000
+    },
+    disponivel_em:["BR","US","PT"]
+})
+
+// inserir multiplos documentos em uma unica chamada
+db.filmes.insertMany([{
+    titulo: "Oppenhimer",
+    tipo: "filme",
+    ano_lancamento: 2023,
+    generos: ["drama", "historia"],
+    duracao_min: 180
+},
+{
+    titulo: "The Bear",
+    tipo: "serie",
+    ano_lancamento: 2022,
+    genero: ["drama", "comedia"],
+    temporadas: 3
+}])
+
+// Buscar todos os filmes
+db.filmes.find()
+
+// Buscar com filtro: Filmes do tipo "Serie"
+db.filmes.find({tipo:"serie"})
+
+// Buscar um unico documento
+db.filmes.findOne({titulo:"Duna: parte 2"})
+
+//Projeção: retornar só o titulo e avaliação(1 = incluir, 0 = excluir)
+db.filmes.find({tipo: "Filme"},{"titulo":1,"avaliacao.media":1,_id:0})
+
+// Atualizar  a média de avaliação de um filme
+db.filmes.updateOne(
+{titulo: "Duna: parte 2"},
+{$set:{"avaliacao.media":8.8, "avaliacao.votos":410000}}
+)
+
+// Adicionar um novo pais a lista de disponibilidade
+db.filmes.updateOne(
+{titulo:"Duna: parte 2"},
+{$push:{disponivel_em:"AR"}}
+)
+
+// Atualizar todos os filmes de 2025 com um novo campo
+db.filmes.updateMany(
+{ano_lancamento:2023},
+{$set:{catalogo_ativo:true}}
+)
+
+// Remover titulo especifico
+db.filmes.deleteOne({titulo:"The Bear"})
+
+// Remover todos os titulos fora do catalogo
+db.filmes.deleteMany({catalogo_ativo:false})
+
+// **** CUIDADO **** PARA REMOVER todos os registros de uma vez
+// ********** NÂO EXECUTEM *********
+db.filmes.deleteMany({})
+
+// Recomendação, não excluir registro e sim desativar
+db.filmes.updateMany(
+{ano_lancamento:{$lt:2010}},
+{$set: {catalogo_ativo:false}}
+)
+
+
+db.inscricoes.insertMany([
+  {
+    nome : "Ana Souza",
+    email : "ana.souza@email.com",
+    localizacao : {
+        type : "Point",
+        coordinates:[47.929220, -24.389230]
+    }
+},
+    {
+        nome : "Bruno Lima",
+        email : "bruno.lima@email.com",
+        localizacao : {
+            type : "Point",
+            coordinates : [-47.931500, -24.391800]
+        }
+    },
+    {
+        nome : "Carla Dias",
+        email : "carla.dias@email.com",
+        localizacao : {
+            type : "Point",
+            coordinates : [-47.925100, -24.386700]
+        }
+    },
+    {
+        nome : "Diego Santos",
+        email : "diego.santos@email.com",
+        localizacao : {
+            type : "Point",
+            coordinates : [-47.935000, -24.395000]
+        }
+    },
+    {
+        nome : "Elena Costa",
+        email : "elena.costa@email.com",
+        localizacao : {
+            type : "Point",
+            coordinates : [-47.920000, -24.380000]
+        }
+    }
+  ])
+
+  db.inscricoes.updateOne(
+    {
+        _id:ObjectId('69c3392e5478a043131e2621')
+    },
+    {
+        $set:{
+            localizacao:{
+                type : "Point",
+                coordinates : [-47.929220, -24.389230]
+            }
+        }
+    }
+  )

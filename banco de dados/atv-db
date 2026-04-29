@@ -1,0 +1,164 @@
+use meubanco
+
+
+1
+
+db.inscricoes.insertMany([
+  {
+    nome: "Ana Souza",
+    email: "ana.souza@email.com",
+    localizacao: {
+      type: "Point",
+      coordinates: [-47.929220, -24.389230]
+    }
+  },
+  {
+    nome: "Bruno Lima",
+    email: "bruno.lima@email.com",
+    localizacao: {
+      type: "Point",
+      coordinates: [-47.931500, -24.391800]
+    }
+  },
+  {
+    nome: "Carla Dias",
+    email: "carla.dias@email.com",
+    localizacao: {
+      type: "Point",
+      coordinates: [-47.925100, -24.386700]
+    }
+  },
+  {
+    nome: "Diego Santos",
+    email: "diego.santos@email.com",
+    localizacao: {
+      type: "Point",
+      coordinates: [-47.935000, -24.395000]
+    }
+  },
+  {
+    nome: "Elena Costa",
+    email: "elena.costa@email.com",
+    localizacao: {
+      type: "Point",
+      coordinates: [-47.920000, -24.380000]
+    }
+  }
+])
+
+db.inscricoes.createIndex({ localizacao: "2dsphere" })
+
+db.inscricoes.countDocuments()
+
+2
+
+db.inscricoes.aggregate([
+  {
+    $geoNear: {
+      near: {
+        type: "Point",
+        coordinates: [-47.929220, -24.389230]
+      },
+      distanceField: "distancia",
+      spherical: true
+    }
+  },
+  { $skip: 1 },
+  { $limit: 3 }
+])
+
+3
+A
+
+db.inscricoes.aggregate([
+  {
+    $geoNear: {
+      near: {
+        type: "Point",
+        coordinates: [-47.929220, -24.389230]
+      },
+      distanceField: "distancia",
+      spherical: true,
+      maxDistance: 500
+    }
+  },
+  { $skip: 1 }
+])
+
+B
+
+db.inscricoes.aggregate([
+  {
+    $geoNear: {
+      near: {
+        type: "Point",
+        coordinates: [-47.929220, -24.389230]
+      },
+      distanceField: "distancia",
+      spherical: true,
+      maxDistance: 2000
+    }
+  },
+  { $skip: 1 }
+])
+
+4
+
+db.inscricoes.aggregate([
+  {
+    $geoNear: {
+      near: {
+        type: "Point",
+        coordinates: [-47.929220, -24.389230]
+      },
+      distanceField: "distanciaMetros",
+      spherical: true
+    }
+  },
+  { $skip: 1 },
+  { $limit: 3 },
+  {
+    $project: {
+      _id: 0,
+      nome: 1,
+      email: 1,
+      distanciaKm: {
+        $divide: ["$distanciaMetros", 1000]
+      }
+    }
+  }
+])
+
+5
+
+db.inscricoes.insertOne({
+  nome: "Pedro",
+  email: "pedro@email.com",
+  localizacao: {
+    type: "Point",
+    coordinates: [-47.8390, -24.4909]
+  }
+})
+
+db.inscricoes.aggregate([
+  {
+    $geoNear: {
+      near: {
+        type: "Point",
+        coordinates: [-47.8398, -24.4974]
+      },
+      distanceField: "distanciaMetros",
+      spherical: true
+    }
+  },
+  { $limit: 3 },
+  {
+    $project: {
+      _id: 0,
+      nome: 1,
+      email: 1,
+      distanciaMetros: 1,
+      distanciaKm: { $divide: ["$distanciaMetros", 1000] }
+    }
+  }
+])

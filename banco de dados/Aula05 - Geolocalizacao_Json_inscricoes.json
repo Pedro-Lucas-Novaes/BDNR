@@ -1,0 +1,222 @@
+[
+  {
+    "nome": "Ana Paula Souza",
+    "email": "ana.souza@email.com",
+    "telefone": "(13) 99801-2345",
+    "turno": "noturno",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.929220, -24.389230]
+    }
+  },
+  {
+    "nome": "Bruno Lima Santos",
+    "email": "bruno.lima@email.com",
+    "telefone": "(13) 99712-3456",
+    "turno": "noturno",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.931500, -24.391800]
+    }
+  },
+  {
+    "nome": "Carla Fernanda Dias",
+    "email": "carla.dias@email.com",
+    "telefone": "(13) 99623-4567",
+    "turno": "matutino",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.925100, -24.386700]
+    }
+  },
+  {
+    "nome": "Diego Henrique Santos",
+    "email": "diego.santos@email.com",
+    "telefone": "(13) 99534-5678",
+    "turno": "noturno",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.935000, -24.395000]
+    }
+  },
+  {
+    "nome": "Elena Costa Oliveira",
+    "email": "elena.costa@email.com",
+    "telefone": "(13) 99445-6789",
+    "turno": "matutino",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.920000, -24.380000]
+    }
+  },
+  {
+    "nome": "Felipe Rodrigues Alves",
+    "email": "felipe.alves@email.com",
+    "telefone": "(13) 99356-7890",
+    "turno": "noturno",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.933200, -24.387500]
+    }
+  },
+  {
+    "nome": "Gabriela Martins Ferreira",
+    "email": "gabriela.ferreira@email.com",
+    "telefone": "(13) 99267-8901",
+    "turno": "matutino",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.927400, -24.393100]
+    }
+  },
+  {
+    "nome": "Henrique Barbosa Nunes",
+    "email": "henrique.nunes@email.com",
+    "telefone": "(13) 99178-9012",
+    "turno": "noturno",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.921800, -24.396400]
+    }
+  },
+  {
+    "nome": "Isabela Torres Pereira",
+    "email": "isabela.pereira@email.com",
+    "telefone": "(13) 99089-0123",
+    "turno": "matutino",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.937600, -24.382900]
+    }
+  },
+  {
+    "nome": "João Victor Carvalho",
+    "email": "joao.carvalho@email.com",
+    "telefone": "(13) 98990-1234",
+    "turno": "noturno",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.924300, -24.400200]
+    }
+  },
+  {
+    "nome": "Kamila Nascimento Rocha",
+    "email": "kamila.rocha@email.com",
+    "telefone": "(13) 98901-2345",
+    "turno": "matutino",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.940100, -24.390700]
+    }
+  },
+  {
+    "nome": "Lucas Mendes Gomes",
+    "email": "lucas.gomes@email.com",
+    "telefone": "(13) 98812-3456",
+    "turno": "noturno",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.918500, -24.384300]
+    }
+  },
+  {
+    "nome": "Mariana Lopes Cardoso",
+    "email": "mariana.cardoso@email.com",
+    "telefone": "(13) 98723-4567",
+    "turno": "matutino",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.930700, -24.398600]
+    }
+  },
+  {
+    "nome": "Nicolas Araújo Melo",
+    "email": "nicolas.melo@email.com",
+    "telefone": "(13) 98634-5678",
+    "turno": "noturno",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.943200, -24.385100]
+    }
+  },
+  {
+    "nome": "Olivia Ribeiro Castro",
+    "email": "olivia.castro@email.com",
+    "telefone": "(13) 98545-6789",
+    "turno": "matutino",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.916200, -24.402800]
+    }
+  },
+  {
+    "nome": "Pedro Augusto Correia",
+    "email": "pedro.correia@email.com",
+    "telefone": "(13) 98456-7890",
+    "turno": "noturno",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.926800, -24.375400]
+    }
+  },
+  {
+    "nome": "Quésia Monteiro Vieira",
+    "email": "quesia.vieira@email.com",
+    "telefone": "(13) 98367-8901",
+    "turno": "matutino",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.945800, -24.393900]
+    }
+  },
+  {
+    "nome": "Rafael Teixeira Pinto",
+    "email": "rafael.pinto@email.com",
+    "telefone": "(13) 98278-9012",
+    "turno": "noturno",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.922900, -24.407500]
+    }
+  },
+  {
+    "nome": "Sara Duarte Moreira",
+    "email": "sara.moreira@email.com",
+    "telefone": "(13) 98189-0123",
+    "turno": "matutino",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.913700, -24.388600]
+    }
+  },
+  {
+    "nome": "Thiago Cunha Bezerra",
+    "email": "thiago.bezerra@email.com",
+    "telefone": "(13) 98090-1234",
+    "turno": "noturno",
+    "curso": "DSM",
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [-47.948500, -24.378200]
+    }
+  }
+]

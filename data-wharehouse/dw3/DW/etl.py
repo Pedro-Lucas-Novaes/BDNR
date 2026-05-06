@@ -3,13 +3,14 @@ import mysql.connector
 import hashlib
 import sys
 import re
-from datetime import date,datetime
+from datetime import date, datetime
 from tabulate import tabulate
 from colorama import Fore, init
 
-# =========================
-# Conexão
-# =========================
+"""
+Configuração com Banco de Dados MySQL
+"""
+
 conexao = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -17,55 +18,65 @@ conexao = mysql.connector.connect(
     database="dw_supermercado"
 )
 
-conecta= conexao.cursor()
+conecta = conexao.cursor() #Conectar com o BD
 
-# =========================
-# Extract
-# =========================
-produtos = pd.read_csv("01_produtos_bruto.csv", encoding="utf-8")
-lojas = pd.read_csv("02_lojas_bruto.csv", encoding="utf-8")
-clientes = pd.read_csv("03_clientes_bruto.csv", encoding="utf-8")
-vendas = pd.read_csv("04_vendas_bruto.csv", encoding="utf-8")
+"""
+1. Extract
+"""
+produtos = pd.read_csv("01_produtos_bruto.csv",sep=",", quotechar='"', encoding="utf-8")
 
-# =========================
-# Transform
-# =========================
+lojas = pd.read_csv("02_lojas_bruto.csv",sep=",", quotechar='"', encoding="utf-8")
 
+clientes = pd.read_csv("03_clientes_bruto.csv",sep=",", quotechar='"', encoding="utf-8")
+
+vendas = pd.read_csv("04_vendas_bruto.csv",sep=",", quotechar='"', encoding="utf-8")
+
+"""
+2. Transform
+"""
 # Produtos
 produtos['categoria'] = produtos["categoria"].str.strip().str.title()
 produtos['subcategoria'] = produtos["subcategoria"].str.strip().str.title()
-produtos['marca'] = produtos["marca"].fillna("Sem marca")
-produtos['preco_custo'] = pd.to_numeric(produtos['preco_custo'],errors="coerce")
-produtos['preco_venda'] = pd.to_numeric(produtos['preco_venda'],errors="coerce")
-produtos['ativo'] = produtos["ativo"].fillna(1).astype(int)
+produtos['marca']= produtos["marca"].fillna("Sem Marca")
+produtos['preco_custo']=pd.to_numeric(produtos['preco_custo'],errors="coerce")
+produtos['preco_venda']=pd.to_numeric(produtos['preco_venda'],errors="coerce")
+produtos['ativo']=produtos['ativo'].fillna(1).astype(int)
 
-produtos=produtos[
+produtos = produtos[
     (produtos['preco_venda']>=0) &
     (produtos['nome_produto'].notna())&
     (produtos['nome_produto'].str.strip()!="")
 ]
 
-# Loja
-lojas= lojas.drop_duplicates(subset="cod_loja")
+#Lojas
+lojas = lojas.drop_duplicates(subset="cod_loja")
 lojas['formato'] = lojas['formato'].str.strip().str.title()
 lojas['gerente'] = lojas['gerente'].str.strip().str.title()
-lojas['area_m2']= pd.to_numeric(lojas["area_m2"],errors="coerce")
-lojas['num_checkouts']=pd.to_numeric(lojas["num_checkouts"],errors="coerce").fillna(0).astype(int)
-lojas["area_m2"]=lojas["area_m2"].fillna(lojas["area_m2"].mean()).astype(int)
-lojas['estado']=lojas["estado"].str.strip().str.upper()
+lojas['area_m2'] = pd.to_numeric(lojas['area_m2'], errors="coerce")
+lojas['num_checkouts'] = pd.to_numeric(lojas['num_checkouts'], errors="coerce").fillna(0).astype(int)
+lojas['area_m2'] = lojas["area_m2"].fillna(lojas['area_m2'].mean()).astype(int)
+lojas['estado'] = lojas['estado'].str.strip().str.upper()
 
-mapa_regiao={
-    'SP':'Sudeste', 'RJ':'Sudeste', 'MG':'Sudeste', 'ES': 'Sudeste',
-    'PR':'Sul', 'SC':'Sul','RS':'Sul',
-    'BA':'Nordeste','PE':'Nordeste','CE':'Nordeste'
+lojas['data_inauguracao'] = pd.to_datetime(
+    lojas['data_inauguracao'],
+    format="%d/%m/%Y",
+    errors="coerce"
+)
+
+lojas['data_inauguracao'] = lojas['data_inauguracao'].dt.strftime("%Y-%m-%d")
+
+
+mapa_regiao = {
+    'SP': 'Sudeste', 'RJ':'Sudeste','MG':'Sudeste','ES':'Sudeste',
+    'PR': 'Sul', 'SC':'Sul','RS':'Sul',
+    'BA': 'Nordeste', 'PE':'Nordeste', 'CE':'Nordeste'
 }
+lojas['regiao'] = lojas['estado'].map(mapa_regiao).fillna("Não Informado")
 
-lojas['regiao']= lojas['estado'].map(mapa_regiao).fillna("Não informado")
-
-# Cliente
+#Cliente
 clientes=clientes.drop_duplicates(subset='cod_cliente')
-clientes['segmento']= clientes['segmento'].str.strip().str.title()
-clientes['estado']= clientes['estado'].str.strip().str.upper().fillna("XX")
+clientes['segmento'] = clientes['segmento'].str.strip().str.title()
+clientes['estado'] = clientes['estado'].fillna("XX").str.strip().str.upper()
 
 def gerar_hash(cpf):
     if pd.isna(cpf):
@@ -73,95 +84,96 @@ def gerar_hash(cpf):
     return hashlib.sha256(str(cpf).encode()).hexdigest()
 
 clientes['cpf_hash']=clientes['cpf'].apply(gerar_hash)
-clientes['regiao']=clientes['estado'].map(mapa_regiao).fillna("Não informado")
+clientes['regiao'] = clientes['estado'].map(mapa_regiao).fillna("Não informado")
 
 clientes = clientes.drop(columns=['cpf'])
 
 cliente_anonimo= pd.DataFrame([{
     "cod_cliente":"CRM-000",
-    "nome":"Cliente Anonimo",
+    "nome_cliente":"Cliente Anonimo",
     "genero":"N",
-    "cidade":"Não informado",
+    "cidade":"Não Informado",
     "estado":"XX",
-    "canal_aquisicao":"Loja Fisica",
+    "canal_aquisicao":"Loja Física",
     "segmento":"Bronze",
     "data_cadastro":"2010-01-01",
-    "cpf_hash": hashlib.sha256("00000000000".encode()).hexdigest(),
-    "regiao":"Não informado",
+    "cpf_hash":hashlib.sha256("00000000000".encode()).hexdigest(),
+    "regiao":"Não Informado",
 }])
 
-clientes=pd.concat([cliente_anonimo,clientes],ignore_index=True)
+clientes=pd.concat([cliente_anonimo, clientes], ignore_index=True)
 
-# Tempo
+#tempo 
 datas = pd.date_range('2024-01-01','2024-12-31')
-
 tempo = pd.DataFrame({
-    'data_completa': datas.astype(str),
+    'data_completa':datas,
     'dia':datas.day,
     'mes':datas.month,
     'ano':datas.year,
     'trimestre':datas.quarter
 })
 
-# ✅ CORREÇÃO DO ERRO DO BANCO
-tempo['dia_semana_num'] = pd.to_datetime(tempo['data_completa']).dt.weekday + 1
+tempo['data_completa'] = tempo['data_completa'].astype(str)
 
 # Vendas
-vendas['quantidade']=pd.to_numeric(vendas['quantidade'],errors="coerce")
-vendas['preco_unitario']=pd.to_numeric(vendas['preco_unitario'],errors="coerce")
-vendas['desconto_unitario']=pd.to_numeric(vendas['desconto_unitario'],errors="coerce").fillna(0)
+vendas['quantidade']=pd.to_numeric(vendas['quantidade'],errors='coerce')
+vendas['preco_unitario']=pd.to_numeric(vendas['preco_unitario'],errors='coerce')
+vendas['desconto_unitario']=pd.to_numeric(vendas['desconto_unitario'],errors='coerce').fillna(0)
 
+#Filtar vendas validas
 vendas=vendas[
-    (vendas['data_venda'].isin(tempo['data_completa']))&
-    (vendas['cod_loja'].isin(lojas['cod_loja']))&
-    (vendas['cod_produto'].isin(produtos['cod_produto']))&
+    (vendas['data_venda'].isin(tempo['data_completa'])) &
+    (vendas['cod_loja'].isin(lojas['cod_loja'])) &
+    (vendas['cod_produto'].isin(produtos['cod_produto'])) &
     (vendas['quantidade']>0)&
     (vendas['preco_unitario']>0)
 ]
 
-vendas.loc[~vendas['cod_cliente'].isin(clientes['cod_cliente']),'cod_cliente'] = 'CRM-000'
+#Cliente desconhecido vira anonimo
+vendas.loc[~vendas['cod_cliente'].isin(clientes['cod_cliente']),'cod_cliente']='CRM-000'
 
-mapa_custo= produtos.set_index("cod_produto")['preco_custo'].to_dict()
-vendas['preco_custo'] = vendas['cod_produto'].map(mapa_custo)
+#calculos
+mapa_custo=produtos.set_index("cod_produto")['preco_custo'].to_dict()
+vendas["preco_custo"] = vendas["cod_produto"].map(mapa_custo)
 
-vendas["valor_bruto"] = vendas["quantidade"] * vendas["preco_unitario"]
-vendas["valor_desconto"] = vendas["quantidade"] * vendas["desconto_unitario"]
-vendas["valor_liquido"] = vendas["valor_bruto"] - vendas["valor_desconto"]
-vendas["custo_total"] = vendas["quantidade"] * vendas["preco_custo"]
-vendas["lucro_bruto"] = vendas["valor_liquido"] - vendas["custo_total"]
-vendas["margem_percent"] = (vendas["lucro_bruto"] / vendas["valor_liquido"]).fillna(0)
+vendas["valor_bruto"]= vendas["quantidade"]* vendas["preco_unitario"]
+vendas["valor_desconto"]= vendas["quantidade"]* vendas["desconto_unitario"]
+vendas["valor_liquido"]= vendas["valor_bruto"] - vendas["valor_desconto"]
+vendas["custo_total"]= vendas["quantidade"]* vendas["preco_custo"]
+vendas["lucro_bruto"]= vendas["valor_liquido"] - vendas["custo_total"]
+vendas["margem_percent"]= vendas["lucro_bruto"] / vendas["valor_liquido"]
+vendas["margem_percent"]= vendas["margem_percent"].fillna(0)
 
-# =========================
-# Load
-# =========================
+
+# 3. Load
 conecta.execute("SET FOREIGN_KEY_CHECKS=0")
+
 conecta.execute("TRUNCATE TABLE fato_venda")
 conecta.execute("TRUNCATE TABLE dim_tempo")
 conecta.execute("TRUNCATE TABLE dim_produto")
 conecta.execute("TRUNCATE TABLE dim_loja")
 conecta.execute("TRUNCATE TABLE dim_cliente")
+
 conecta.execute("SET FOREIGN_KEY_CHECKS=1")
 
-# Tempo
+#Carregar dados
+
 for _, linha in tempo.iterrows():
     conecta.execute(
-        "INSERT INTO dim_tempo (data_completa, dia, mes, ano, trimestre, dia_semana_num) VALUES (%s,%s,%s,%s,%s,%s)",
-        (
+        "insert into dim_tempo (data_completa, dia, mes, ano, trimestre) values (%s,%s,%s,%s,%s)", (
             linha["data_completa"],
-            linha["dia"],
-            linha["mes"],
-            linha["ano"],
-            linha["trimestre"],
-            linha["dia_semana_num"]
+            int(linha["dia"]),
+            int(linha["mes"]),
+            int(linha["ano"]),
+            int(linha["trimestre"])
         )
     )
 
-# Produto
-mapa_produto_sk = {}
+# Carregar dim_Produto
+mapa_produto_sk={}
 for _, linha in produtos.iterrows():
     conecta.execute(
-        "INSERT INTO dim_produto (cod_prod_erp, nome_produto, marca, categoria, subcategoria, unidade_medida, preco_custo, preco_tabela, fornecedor, ativo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
-        (
+        "Insert into dim_produto (cod_produto_erp, nome_produto, marca, categoria, subcategoria,unidade_medida,preco_custo,preco_tabela,fornecedor,ativo) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
             linha["cod_produto"],
             linha["nome_produto"],
             linha["marca"],
@@ -171,17 +183,26 @@ for _, linha in produtos.iterrows():
             float(linha["preco_custo"]),
             float(linha["preco_venda"]),
             linha["fornecedor"],
-            int(linha["ativo"]),
-        )
-    )
-    mapa_produto_sk[linha["cod_produto"]] = conecta.lastrowid
+            int(linha["ativo"])
+        ))
+    mapa_produto_sk[linha["cod_produto"]]=conecta.lastrowid
 
-# Loja
+#Carregar dim_loja
 mapa_loja_sk = {}
+
+# Tratamento de valores nulos em lojas antes de carregar no MySQL
+lojas["nome_loja"] = lojas["nome_loja"].fillna("Não Informado")
+lojas["formato"] = lojas["formato"].fillna("Não Informado")
+lojas["endereco"] = lojas["endereco"].fillna("Não Informado")
+lojas["cidade"] = lojas["cidade"].fillna("Não Informado")
+lojas["estado"] = lojas["estado"].fillna("XX")
+lojas["regiao"] = lojas["regiao"].fillna("Não Informado")
+lojas["gerente"] = lojas["gerente"].fillna("Não Informado")
+lojas["data_inauguracao"] = lojas["data_inauguracao"].fillna("2010-01-01")
+
 for _, linha in lojas.iterrows():
     conecta.execute(
-        "INSERT INTO dim_loja (cod_loja, nome_loja, formato, endereco, cidade, estado, regiao, area_m2, num_checkouts, gerente, data_inauguracao, ativa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,1)",
-        (
+        "insert into dim_loja (cod_loja, nome_loja, formato, endereco, cidade, estado, regiao, area_m2, num_checkouts, gerente, data_inauguracao, ativa) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,1)",(
             linha["cod_loja"],
             linha["nome_loja"],
             linha["formato"],
@@ -195,16 +216,26 @@ for _, linha in lojas.iterrows():
             linha["data_inauguracao"],
         )
     )
-    mapa_loja_sk[linha["cod_loja"]] = conecta.lastrowid
 
-# Cliente
-mapa_cliente_sk = {}
+    mapa_loja_sk[linha["cod_loja"]]=conecta.lastrowid
+
+# Tratamento de valores nulos em clientes antes de carregar no MySQL
+clientes["nome_cliente"] = clientes["nome_cliente"].fillna("Não Informado")
+clientes["genero"] = clientes["genero"].fillna("N")
+clientes["cidade"] = clientes["cidade"].fillna("Não Informado")
+clientes["estado"] = clientes["estado"].fillna("XX")
+clientes["regiao"] = clientes["regiao"].fillna("Não Informado")
+clientes["canal_aquisicao"] = clientes["canal_aquisicao"].fillna("Não Informado")
+clientes["segmento"] = clientes["segmento"].fillna("Bronze")
+clientes["data_cadastro"] = clientes["data_cadastro"].fillna("2010-01-01")
+
+# carregar dim_clientes
+mapa_cliente_sk={}
 for _, linha in clientes.iterrows():
     conecta.execute(
-        "INSERT INTO dim_cliente (cod_cliente, nome_cliente, cpf_hash, genero, cidade, estado, regiao, canal_aquisicao, segmento, data_cadastro) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
-        (
+        "Insert into dim_cliente(cod_cliente_crm,nome_cliente, cpf_hash, genero, cidade, estado, regiao, canal_aquisicao, segmento, data_cadastro) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
             linha["cod_cliente"],
-            linha["nome"],
+            linha["nome_cliente"],
             linha["cpf_hash"],
             linha["genero"],
             linha["cidade"],
@@ -212,20 +243,19 @@ for _, linha in clientes.iterrows():
             linha["regiao"],
             linha["canal_aquisicao"],
             linha["segmento"],
-            linha["data_cadastro"],
-        )
-    )
-    mapa_cliente_sk[linha["cod_cliente"]] = conecta.lastrowid
+            linha["data_cadastro"]
+        ))
+    mapa_cliente_sk[linha["cod_cliente"]]=conecta.lastrowid
 
-# Tempo SK
-conecta.execute("SELECT sk_tempo, data_completa FROM dim_tempo")
-mapa_tempo_sk = {str(data): sk for sk, data in conecta.fetchall()}
+# busca SK da dimensao tempo
+conecta.execute("Select sk_tempo, data_completa from dim_tempo")
+mapa_tempo_sk={str(data): sk for sk, data in conecta.fetchall()}
 
-# Fato
+# carregar fato_venda
+
 for _, linha in vendas.iterrows():
     conecta.execute(
-        "INSERT INTO fato_venda (sk_tempo, sk_produto, sk_cliente, sk_loja, num_cupom_fiscal, quantidade, preco_unitario, desconto_unitario, valor_bruto, valor_desconto, valor_liquido, custo_total, lucro_bruto, margem_percent) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
-        (
+        "Insert into fato_venda (sk_tempo, sk_produto, sk_cliente, sk_loja, num_cupom_fiscal, quantidade, preco_unitario, desconto_unit, valor_bruto, valor_desconto, valor_liquido, custo_total, lucro_bruto, margem_percent)values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
             mapa_tempo_sk[linha["data_venda"]],
             mapa_produto_sk[linha["cod_produto"]],
             mapa_cliente_sk[linha["cod_cliente"]],
@@ -243,9 +273,7 @@ for _, linha in vendas.iterrows():
         )
     )
 
-# Finalização
 conexao.commit()
 conecta.close()
 conexao.close()
-
 print("ETL concluído com sucesso!!!")
